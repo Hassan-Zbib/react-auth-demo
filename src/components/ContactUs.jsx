@@ -1,23 +1,34 @@
-import { TextField, Container } from "@mui/material"
+import { TextField } from "@mui/material"
 import { useState } from "react"
 import Button from "@mui/material/Button"
+import { makeStyles } from "@mui/styles"
+
+const useStyles = makeStyles({
+  input: {
+    color: "white",
+    minWidth: '30vw'
+  },
+})
 
 const ContactUs = () => {
+  const classes = useStyles()
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: null,
+    phone: "",
     subject: "",
     message: "",
   })
 
-  const { name, email, phone, subject, message} = formData
+  const { name, email, phone, subject, message } = formData
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.label]: e.target.value,
+      [e.target.name]: e.target.value,
     }))
+    console.log(formData)
   }
 
   const onSubmit = (e) => {
@@ -35,7 +46,9 @@ const ContactUs = () => {
           <form onSubmit={onSubmit}>
             <div className="form-group">
               <TextField
-                label="name"
+                inputProps={{ className: classes.input }}
+                label="Name"
+                name="name"
                 variant="outlined"
                 value={name}
                 onChange={onChange}
@@ -43,14 +56,52 @@ const ContactUs = () => {
             </div>
             <div className="form-group">
               <TextField
-                label="email"
+                inputProps={{ className: classes.input }}
+                label="Email"
+                name="email"
                 variant="outlined"
                 value={email}
                 onChange={onChange}
               />
+            </div>{" "}
+            <div className="form-group">
+              <TextField
+                inputProps={{ className: classes.input }}
+                label="Phone"
+                name="phone"
+                variant="outlined"
+                value={phone}
+                onChange={onChange}
+              />
+            </div>{" "}
+            <div className="form-group">
+              <TextField
+                inputProps={{ className: classes.input }}
+                label="Subject"
+                name="subject"
+                variant="outlined"
+                value={subject}
+                fullWidth
+                onChange={onChange}
+              />
+            </div>{" "}
+            <div className="form-group">
+              <TextField
+                multiline={true}
+                rows={3}
+                inputProps={{ className: classes.input }}
+                label="Message"
+                name="message"
+                variant="outlined"
+                value={message}
+                fullWidth
+                onChange={onChange}
+              />
             </div>
             <div className="form-group">
-              <Button variant="outlined" onClick={onSubmit}>Submit</Button>
+              <Button variant="outlined" onClick={onSubmit}>
+                Submit
+              </Button>
             </div>
           </form>
         </section>
