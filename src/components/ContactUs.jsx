@@ -2,15 +2,19 @@ import { TextField } from "@mui/material"
 import { useState } from "react"
 import Button from "@mui/material/Button"
 import { makeStyles } from "@mui/styles"
+import axios from "axios"
 
 const useStyles = makeStyles({
   input: {
     color: "white",
-    minWidth: '30vw'
+    minWidth: "30vw",
   },
 })
 
 const ContactUs = () => {
+  const api = axios.create({
+    baseURL: "http://127.0.0.1:8000/api/contact/add",
+  })
   const classes = useStyles()
 
   const [formData, setFormData] = useState({
@@ -21,6 +25,10 @@ const ContactUs = () => {
     message: "",
   })
 
+  const resetValues = () => {
+      setFormData(formData.getInitialState())
+  }
+
   const { name, email, phone, subject, message } = formData
 
   const onChange = (e) => {
@@ -28,11 +36,20 @@ const ContactUs = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }))
-
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
+
+    try {
+        let response = await api.post('/', formData).then(res => res.data)
+        console.log(response)
+    } catch (error) {
+        console.log(error)
+    }
+
+
+
   }
 
   return (
@@ -46,6 +63,8 @@ const ContactUs = () => {
           <form onSubmit={onSubmit}>
             <div className="form-group">
               <TextField
+
+              required
                 inputProps={{ className: classes.input }}
                 label="Name"
                 name="name"
@@ -56,6 +75,7 @@ const ContactUs = () => {
             </div>
             <div className="form-group">
               <TextField
+              required
                 inputProps={{ className: classes.input }}
                 label="Email"
                 name="email"
@@ -66,6 +86,7 @@ const ContactUs = () => {
             </div>{" "}
             <div className="form-group">
               <TextField
+              required
                 inputProps={{ className: classes.input }}
                 label="Phone"
                 name="phone"
@@ -76,6 +97,7 @@ const ContactUs = () => {
             </div>{" "}
             <div className="form-group">
               <TextField
+              required
                 inputProps={{ className: classes.input }}
                 label="Subject"
                 name="subject"
@@ -87,6 +109,7 @@ const ContactUs = () => {
             </div>{" "}
             <div className="form-group">
               <TextField
+              required
                 multiline={true}
                 rows={3}
                 inputProps={{ className: classes.input }}
@@ -99,7 +122,7 @@ const ContactUs = () => {
               />
             </div>
             <div className="form-group">
-              <Button variant="contained" onClick={onSubmit} >
+              <Button variant="contained" onClick={onSubmit}>
                 Submit
               </Button>
             </div>
