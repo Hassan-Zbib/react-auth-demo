@@ -28,7 +28,7 @@ const ContactUs = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }))
-    console.log(formData)
+
   }
 
   const onSubmit = (e) => {
@@ -99,7 +99,7 @@ const ContactUs = () => {
               />
             </div>
             <div className="form-group">
-              <Button variant="outlined" onClick={onSubmit}>
+              <Button variant="contained" onClick={onSubmit} >
                 Submit
               </Button>
             </div>

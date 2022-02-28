@@ -11,7 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
-
+:root {
+  --footer-color: #364d64;
+}
 .carousel-image {
   display: block;
   height: 100%;
@@ -26,7 +28,7 @@ code {
 #about-us {
   width: 100%;
   min-height: 30vh;
-  background-color: #2b3035;
+  background-color: var(--footer-color);
   color: white;
   padding: 5px;
   margin-top: 10px;
@@ -39,7 +41,7 @@ code {
 #contact-us {
   width: 100%;
   min-height: 40vh;
-  background-color: #2b3035;
+  background-color: var(--footer-color);
   padding: 5px;
   margin-top: 10px;
   color: white;
