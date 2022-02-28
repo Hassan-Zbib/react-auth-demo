@@ -11,25 +11,27 @@ const useStyles = makeStyles({
   },
 })
 
+const formData = {
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  }
+
 const ContactUs = () => {
   const api = axios.create({
     baseURL: "http://127.0.0.1:8000/api/contact/add",
   })
   const classes = useStyles()
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  })
+  const [{ name, email, phone, subject, message }, setFormData] = useState(formData)
 
   const resetValues = () => {
-      setFormData(formData.getInitialState())
+      setFormData({ ...formData })
   }
 
-  const { name, email, phone, subject, message } = formData
+
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -41,15 +43,21 @@ const ContactUs = () => {
   const onSubmit = async (e) => {
     e.preventDefault()
 
+    let payload = {
+        name,
+        email,
+        phone,
+        subject,
+        message
+    }
+
     try {
-        let response = await api.post('/', formData).then(res => res.data)
-        console.log(response)
+        let response = await api.post('/', payload)
+        console.log(response.data)
     } catch (error) {
         console.log(error)
     }
-
-
-
+    resetValues()
   }
 
   return (
