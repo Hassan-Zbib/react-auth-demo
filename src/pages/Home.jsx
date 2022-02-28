@@ -2,8 +2,7 @@ import Slider from "../components/Slider"
 import ServiceCard from "../components/ServiceCard"
 import Typography from "@mui/material/Typography"
 import Grid from "@mui/material/Grid"
-import Box from "@mui/material/Box"
-
+import ContactUs from "../components/ContactUs"
 
 const Home = () => {
   return (
@@ -46,22 +45,24 @@ const Home = () => {
       </div>
 
       <div id="about-us">
-        <Grid container spacing={2} >
+        <Grid container spacing={2}>
           <Grid item xs={12} md={3}>
-            <Typography variant="h6" noWrap component="div">
-              About Us
-            </Typography>
+            <section className="heading">
+              <h1>About Us</h1>
+            </section>
           </Grid>
           <Grid item xs={12} md={9}>
             <Typography variant="body1">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
+              blanditiis tenetur unde suscipit, quam beatae rerum inventore
               consectetur, neque doloribus, cupiditate numquam dignissimos
               laborum fugiat deleniti? Eum quasi quidem quibusdam.
             </Typography>
           </Grid>
         </Grid>
       </div>
+
+      <ContactUs />
     </>
   )
 }
