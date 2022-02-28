@@ -12,12 +12,12 @@ const useStyles = makeStyles({
 })
 
 const formData = {
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  }
+  name: "",
+  email: "",
+  phone: "",
+  subject: "",
+  message: "",
+}
 
 const ContactUs = () => {
   const api = axios.create({
@@ -25,13 +25,12 @@ const ContactUs = () => {
   })
   const classes = useStyles()
 
-  const [{ name, email, phone, subject, message }, setFormData] = useState(formData)
+  const [{ name, email, phone, subject, message }, setFormData] =
+    useState(formData)
 
   const resetValues = () => {
-      setFormData({ ...formData })
+    setFormData({ ...formData })
   }
-
-
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -40,23 +39,21 @@ const ContactUs = () => {
     }))
   }
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault()
 
     let payload = {
-        name,
-        email,
-        phone,
-        subject,
-        message
+      name,
+      email,
+      phone,
+      subject,
+      message,
     }
 
-    try {
-        let response = await api.post('/', payload)
-        console.log(response.data)
-    } catch (error) {
-        console.log(error)
-    }
+    api.post("/", payload)
+        .then(res => console.log(res.data))
+        .catch(err => {console.log(err.response.data)})
+
     resetValues()
   }
 
@@ -71,8 +68,7 @@ const ContactUs = () => {
           <form onSubmit={onSubmit}>
             <div className="form-group">
               <TextField
-
-              required
+                required
                 inputProps={{ className: classes.input }}
                 label="Name"
                 name="name"
@@ -83,7 +79,7 @@ const ContactUs = () => {
             </div>
             <div className="form-group">
               <TextField
-              required
+                required
                 inputProps={{ className: classes.input }}
                 label="Email"
                 name="email"
@@ -94,7 +90,7 @@ const ContactUs = () => {
             </div>{" "}
             <div className="form-group">
               <TextField
-              required
+                required
                 inputProps={{ className: classes.input }}
                 label="Phone"
                 name="phone"
@@ -105,7 +101,7 @@ const ContactUs = () => {
             </div>{" "}
             <div className="form-group">
               <TextField
-              required
+                required
                 inputProps={{ className: classes.input }}
                 label="Subject"
                 name="subject"
@@ -117,7 +113,7 @@ const ContactUs = () => {
             </div>{" "}
             <div className="form-group">
               <TextField
-              required
+                required
                 multiline={true}
                 rows={3}
                 inputProps={{ className: classes.input }}
