@@ -23,7 +23,7 @@ function App() {
         </Container>
       </Router>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
