@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register, reset } from "../features/auth/authSlice";
 import { makeStyles } from "@mui/styles"
+import Spinner from '../components/Spinner'
 
 
 const useStyles = makeStyles({
@@ -20,7 +21,10 @@ const formData = {
   password_confirmation: "",
 }
 
-const { name, email, password, password_confirmation} = formData
+
+const Signup = () => {
+
+  const { name, email, password, password_confirmation} = formData
 
 const navigate = useNavigate()
 const dispatch = useDispatch()
@@ -55,7 +59,11 @@ useEffect(() => {
   dispatch(reset())
 }, [user, isError, isSuccess, message, navigate, dispatch])
 
-const Signup = () => {
+
+  if(isLoading) {
+    return <Spinner />
+  }
+  
   return <div>Signup</div>;
 };
 export default Signup;
