@@ -14,8 +14,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { logout, reset } from "../features/auth/authSlice"
 import { Link as UiLink } from "@mui/material"
 
-const pages = ["Slider", "Services", "About Us", "Contact Us"]
-
 const Navbar = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()

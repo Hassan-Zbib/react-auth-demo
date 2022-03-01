@@ -57,22 +57,27 @@ id="slider"
     swipeable
   >
     <img
+    alt=""
       src="../assets/1.jpg"
       className="carousel-image"
     />
     <img
+    alt=""
       src="../assets/2.avif"
       className="carousel-image"
     />
     <img
+    alt=""
       src="../assets/3.avif"
       className="carousel-image"
     />
     <img
+    alt=""
       src="../assets/4.avif"
       className="carousel-image"
     />
     <img
+    alt=""
       src="../assets/5.avif"
       className="carousel-image"
     />

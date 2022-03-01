@@ -1,10 +1,23 @@
 import axios from "axios";
 
-const API_URL = 'http://localhost:8000/api/auth/'
+const BASE_URL = 'http://localhost:8000/api/'
+const AUTH_URL = BASE_URL+'auth/'
+const USER_URL = BASE_URL+'user/'
 
 // Register user
 const register = async (userData) => {
-    const res = await axios.post(API_URL + 'register', userData)
+    const res = await axios.post(AUTH_URL + 'register', userData)
+
+    if(res.data) {
+        localStorage.setItem('user', JSON.stringify(res.data))
+    }
+    return res.data
+}
+
+// Login user
+const login = async (userData) => {
+ 
+    const res = await axios.post(AUTH_URL + 'login', userData)
 
     if(res.data) {
         localStorage.setItem('user', JSON.stringify(res.data))
@@ -13,15 +26,14 @@ const register = async (userData) => {
     return res.data
 }
 
-// Login user
-const login = async (userData) => {
-    // change api url and concatinate login endpoint later
-    const res = await axios.post(API_URL + 'login', userData)
-
-    if(res.data) {
-        // should add logout call to api
-        localStorage.setItem('user', JSON.stringify(res.data))
+const update = async (userData, token) =>{
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
     }
+
+    const res = await axios.post(USER_URL + 'update', userData, config)
 
     return res.data
 }
@@ -34,7 +46,8 @@ const logout = () => {
 const authService = {
     register,
     logout,
-    login
+    login,
+    update
 }
 
 export default authService
