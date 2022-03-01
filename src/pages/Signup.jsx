@@ -38,7 +38,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      message.forEach(mes => {toast.error(mes)})
     }
 
     if (isSuccess || user) {
@@ -46,7 +46,7 @@ const Signup = () => {
     }
 
     dispatch(reset())
-  }, [user, isError, isSuccess, message, navigate, dispatch])
+  }, [user, isError, isSuccess, navigate, dispatch])
 
   if (isLoading) {
     return <Spinner />

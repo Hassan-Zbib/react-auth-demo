@@ -19,20 +19,20 @@ export const register = createAsyncThunk(
     try {
       return await authService.register(user)
     } catch (error) {
-      // let message = ""
 
-      // let err = JSON.parse(error.response.data)
-      // if (err) {
-      //   for (let key in err) {
-      //     err[key].forEach((mes) => {
-      //       message += mes
-      //     })
-      //   }
-      // } else {
-      //   message = error.toString()
-      // }
+      let message = []
+      let err = error.response.data
+      if (err) {
+        for (let key in err) {
+          err[key].forEach((mes) => {
+            message.push(mes)
+          })
+        }
+      } else {
+        message.push(error.toString())
+      }
+      return thunkAPI.rejectWithValue(message)
 
-      // return thunkAPI.rejectWithValue(message)
     }
   }
 )
@@ -42,20 +42,20 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
     return await authService.login(user)
   } catch (error) {
-    // let message = ""
 
-    // let err = error.response.data
-    // if (err) {
-    //   for (let key in err) {
-    //     err[key].forEach((mes) => {
-    //       message += mes
-    //     })
-    //   }
-    // } else {
-    //   message = error.toString()
-    // }
+    let message = []
+    let err = error.response.data
+    if (err) {
+      for (let key in err) {
+        err[key].forEach((mes) => {
+          message.push(mes)
+        })
+      }
+    } else {
+      message.push(error.toString())
+    }
+    return thunkAPI.rejectWithValue(message)
 
-    // return thunkAPI.rejectWithValue(message)
   }
 })
 
