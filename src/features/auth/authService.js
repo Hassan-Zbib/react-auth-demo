@@ -1,68 +1,67 @@
-import axios from "axios";
+import axios from "axios"
 
-const BASE_URL = 'http://localhost:8000/api/'
-const AUTH_URL = BASE_URL+'auth/'
-const USER_URL = BASE_URL+'user/'
+const BASE_URL = "http://localhost:8000/api/"
+const AUTH_URL = BASE_URL + "auth/"
+const USER_URL = BASE_URL + "user/"
 
 // Register user
 const register = async (userData) => {
-    const res = await axios.post(AUTH_URL + 'register', userData)
+  const res = await axios.post(AUTH_URL + "register", userData)
 
-    if(res.data) {
-        localStorage.setItem('user', JSON.stringify(res.data))
-    }
-    return res.data
+  if (res.data) {
+    localStorage.setItem("user", JSON.stringify(res.data))
+  }
+  return res.data
 }
 
 // Login user
 const login = async (userData) => {
- 
-    const res = await axios.post(AUTH_URL + 'login', userData)
+  const res = await axios.post(AUTH_URL + "login", userData)
 
-    if(res.data) {
-        localStorage.setItem('user', JSON.stringify(res.data))
-    }
+  if (res.data) {
+    localStorage.setItem("user", JSON.stringify(res.data))
+  }
 
-    return res.data
+  return res.data
 }
 
 // Update user
-const update = async (userData, token) =>{
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
+const update = async (userData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
 
-    const res = await axios.post(USER_URL + 'update', userData, config)
+  const res = await axios.post(USER_URL + "update", userData, config)
 
-    return res.data
+  return res.data
 }
 
 // Get user
-const get = async (token) =>{
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
+const get = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
 
-    const res = await axios.get(AUTH_URL + 'user-profile', config)
+  const res = await axios.get(AUTH_URL + "user-profile", config)
 
-    return res.data
+  return res.data
 }
 
 // logout user
 const logout = () => {
-    localStorage.removeItem('user')
+  localStorage.removeItem("user")
 }
 
 const authService = {
-    register,
-    logout,
-    login,
-    update,
-    get
+  register,
+  logout,
+  login,
+  update,
+  get,
 }
 
 export default authService

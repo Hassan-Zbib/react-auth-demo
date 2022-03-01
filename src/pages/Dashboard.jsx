@@ -29,38 +29,46 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  // get state data
   const { user, isLoading, isError, isSuccess, message, profile } = useSelector(
     (state) => state.auth
   )
 
+  // initial get profile
   useEffect(() => {
     dispatch(get())
-  },[])
+  }, [])
 
+  //secure route
   useEffect(() => {
     if (!user) {
       navigate("/")
     }
-  },[user] )
+  }, [user])
 
+  // watch state
   useEffect(() => {
     if (isError) {
-      message.forEach(mes => {toast.error(mes)})
+      message.forEach((mes) => {
+        toast.error(mes)
+      })
     }
 
     if (isSuccess) {
-      message.forEach(mes => {toast.success(mes)})
+      message.forEach((mes) => {
+        toast.success(mes)
+      })
     }
 
     dispatch(reset())
     dispatch(get())
-
   }, [isError, isSuccess, navigate, dispatch])
 
   if (isLoading) {
     return <Spinner />
   }
 
+  //reset form data
   const resetValues = () => {
     setFormData({ ...formData })
   }
@@ -79,30 +87,36 @@ const Dashboard = () => {
     const tempData = {
       name,
       email,
-      password
+      password,
     }
-      const userData = {}
-      for( let obj in tempData) {
-        if (tempData[obj]) {
-          userData[obj] = tempData[obj]
-        }
+    const userData = {}
+    for (let obj in tempData) {
+      if (tempData[obj]) {
+        userData[obj] = tempData[obj]
       }
+    }
 
-      if( Object.keys(userData).length == 0) {
-        toast.error('Please Enter Atleast One Field To Update')
-      } else {
-        dispatch(update(userData))
-        resetValues()
-      }
+    if (Object.keys(userData).length == 0) {
+      toast.error("Please Enter Atleast One Field To Update")
+    } else {
+      dispatch(update(userData))
+      resetValues()
+    }
   }
 
   return (
     <>
-
       <div className="form-container">
         <section className="heading">
           <h1>Profile</h1>
-          { !profile.message ? (<p>Name : {profile.name} <br/>Email : {profile.email} <br/></p>) : ('')}
+          {!profile.message ? (
+            <p>
+              Name : {profile.name} <br />
+              Email : {profile.email} <br />
+            </p>
+          ) : (
+            ""
+          )}
           <p>Update your Information here</p>
         </section>
 
@@ -139,9 +153,7 @@ const Dashboard = () => {
               />
             </div>
             <div className="form-group">
-              <Button variant="contained" 
-              type="submit"
-              >
+              <Button variant="contained" type="submit">
                 Update
               </Button>
             </div>

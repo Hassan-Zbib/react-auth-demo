@@ -26,9 +26,11 @@ const ContactUs = () => {
   })
   const classes = useStyles()
 
+  // get state data
   const [{ name, email, phone, subject, message }, setFormData] =
     useState(formData)
 
+  //reset form data
   const resetValues = () => {
     setFormData({ ...formData })
   }

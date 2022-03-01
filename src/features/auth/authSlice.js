@@ -10,7 +10,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: []
+  message: [],
 }
 
 // SignUp user
@@ -20,7 +20,6 @@ export const register = createAsyncThunk(
     try {
       return await authService.register(user)
     } catch (error) {
-
       let message = []
       let err = JSON.parse(error.response.data)
       if (err) {
@@ -33,7 +32,6 @@ export const register = createAsyncThunk(
         message.push(error.toString())
       }
       return thunkAPI.rejectWithValue(message)
-
     }
   }
 )
@@ -43,7 +41,6 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
     return await authService.login(user)
   } catch (error) {
-
     let message = []
     let err = error.response.data
     if (err) {
@@ -56,7 +53,6 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
       message.push(error.toString())
     }
     return thunkAPI.rejectWithValue(message)
-
   }
 })
 
@@ -65,13 +61,10 @@ export const update = createAsyncThunk(
   "user/update",
   async (userData, thunkAPI) => {
     try {
-
       const token = thunkAPI.getState().auth.user.access_token
       let res = await authService.update(userData, token)
       return thunkAPI.fulfillWithValue([res.message])
-
     } catch (error) {
-
       let message = []
       let err = error.response.data
       if (err) {
@@ -84,26 +77,22 @@ export const update = createAsyncThunk(
         message.push(error.toString())
       }
       return thunkAPI.rejectWithValue(message)
-
     }
   }
 )
 
 // Get user
-export const get = createAsyncThunk(
-  "user/get",
-  async (_, thunkAPI) => {
-    try {
-
-      const token = thunkAPI.getState().auth.user.access_token
-      let res = await authService.get(token)
-      return thunkAPI.fulfillWithValue(res)
-
-    } catch (error) {
-      return thunkAPI.rejectWithValue(["Something Went Wrong, Please Try to Login Again"])
-    }
+export const get = createAsyncThunk("user/get", async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.access_token
+    let res = await authService.get(token)
+    return thunkAPI.fulfillWithValue(res)
+  } catch (error) {
+    return thunkAPI.rejectWithValue([
+      "Something Went Wrong, Please Try to Login Again",
+    ])
   }
-)
+})
 
 // logout user
 export const logout = createAsyncThunk("auth/logout", async () => {
@@ -124,7 +113,7 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    // Register Side effects
+      // Register Side effects
       .addCase(register.pending, (state) => {
         state.isLoading = true
       })

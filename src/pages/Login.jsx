@@ -30,13 +30,17 @@ const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  // get state data
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   )
 
+  // watch state
   useEffect(() => {
     if (isError) {
-      message.forEach(mes => {toast.error(mes)})
+      message.forEach((mes) => {
+        toast.error(mes)
+      })
     }
 
     if (isSuccess || user) {
@@ -50,6 +54,7 @@ const Login = () => {
     return <Spinner />
   }
 
+  //reset form data
   const resetValues = () => {
     setFormData({ ...formData })
   }
@@ -126,7 +131,7 @@ const Login = () => {
               <p>
                 New User :
                 <UiLink variant="body2" component={Link} to={"/Signup"}>
-                &nbsp; Create Account
+                  &nbsp; Create Account
                 </UiLink>
               </p>
             </div>

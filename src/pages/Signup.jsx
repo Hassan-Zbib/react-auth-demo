@@ -27,7 +27,9 @@ const formData = {
 const Signup = () => {
   const classes = useStyles()
 
-  const [{ name, email, password, password_confirmation }, setFormData] = useState(formData)
+  // get state data
+  const [{ name, email, password, password_confirmation }, setFormData] =
+    useState(formData)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -36,9 +38,12 @@ const Signup = () => {
     (state) => state.auth
   )
 
+  // watch state
   useEffect(() => {
     if (isError) {
-      message.forEach(mes => {toast.error(mes)})
+      message.forEach((mes) => {
+        toast.error(mes)
+      })
     }
 
     if (isSuccess || user) {
@@ -52,6 +57,7 @@ const Signup = () => {
     return <Spinner />
   }
 
+  //reset form data
   const resetValues = () => {
     setFormData({ ...formData })
   }
@@ -66,15 +72,14 @@ const Signup = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
+    const userData = {
+      name,
+      email,
+      password,
+      password_confirmation,
+    }
 
-      const userData = {
-        name,
-        email,
-        password,
-        password_confirmation,
-      }
-
-      dispatch(register(userData))
+    dispatch(register(userData))
     resetValues()
   }
 
@@ -82,21 +87,21 @@ const Signup = () => {
     <>
       <div className="form-container">
         <section className="heading">
-        <Button
-          sx={{ my: 2, color: "white" }}
-          component={Link}
-          variant="outlined"
-          to={"/"}
-        >
-          Go Back
-        </Button>
+          <Button
+            sx={{ my: 2, color: "white" }}
+            component={Link}
+            variant="outlined"
+            to={"/"}
+          >
+            Go Back
+          </Button>
           <h1>Sign Up</h1>
           <p>Sign Up by entering your information here</p>
         </section>
 
         <section className="form">
           <form onSubmit={onSubmit}>
-          <div className="form-group">
+            <div className="form-group">
               <TextField
                 required
                 inputProps={{ className: classes.input }}
@@ -147,7 +152,7 @@ const Signup = () => {
               <p>
                 Already Registered :
                 <UiLink variant="body2" component={Link} to={"/Login"}>
-                &nbsp; Login Here
+                  &nbsp; Login Here
                 </UiLink>
               </p>
             </div>

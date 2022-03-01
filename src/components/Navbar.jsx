@@ -113,7 +113,7 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                              <IconButton
+                <IconButton
                   size="large"
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
@@ -144,14 +144,14 @@ const Navbar = () => {
                   <MenuItem
                     onClick={handleCloseNavMenu}
                     component={Link}
-                    to={'/'}
+                    to={"/"}
                   >
                     <Typography textAlign="center">Home</Typography>
                   </MenuItem>
                   <MenuItem
                     onClick={handleCloseNavMenu}
                     component={Link}
-                    to={'/Dashboard'}
+                    to={"/Dashboard"}
                   >
                     <Typography textAlign="center">Dashboard</Typography>
                   </MenuItem>
@@ -214,7 +214,7 @@ const Navbar = () => {
                 <Button
                   component={Link}
                   sx={{ my: 2, color: "white", display: "block" }}
-                  to={'/'}
+                  to={"/"}
                 >
                   <Typography textAlign="center" fontSize={"small"}>
                     Home
@@ -223,10 +223,10 @@ const Navbar = () => {
                 <Button
                   component={Link}
                   sx={{ my: 2, color: "white", display: "block" }}
-                  to={'/Dashboard'}
+                  to={"/Dashboard"}
                 >
                   <Typography textAlign="center" fontSize={"small"}>
-                  Dashboard
+                    Dashboard
                   </Typography>
                 </Button>
               </>
