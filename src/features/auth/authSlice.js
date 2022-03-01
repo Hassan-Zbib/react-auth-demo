@@ -91,7 +91,7 @@ export const update = createAsyncThunk(
 
 // Get user
 export const get = createAsyncThunk(
-  "user/update",
+  "user/get",
   async (_, thunkAPI) => {
     try {
 
@@ -100,7 +100,7 @@ export const get = createAsyncThunk(
       return thunkAPI.fulfillWithValue(res)
 
     } catch (error) {
-      return thunkAPI.rejectWithValue({message: "Something Went Wrong, Please Try to Login Again"})
+      return thunkAPI.rejectWithValue(["Something Went Wrong, Please Try to Login Again"])
     }
   }
 )
@@ -177,7 +177,8 @@ export const authSlice = createSlice({
         state.profile = action.payload
       })
       .addCase(get.rejected, (state, action) => {
-        state.profile = action.payload
+        state.isError = true
+        state.message = action.payload
       })
   },
 })

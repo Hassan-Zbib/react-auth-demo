@@ -66,10 +66,7 @@ const Signup = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    // inplace validation
-    if (password !== password_confirmation) {
-      toast.error("Passwords do not match")
-    } else {
+
       const userData = {
         name,
         email,
@@ -78,8 +75,6 @@ const Signup = () => {
       }
 
       dispatch(register(userData))
-    }
-
     resetValues()
   }
 

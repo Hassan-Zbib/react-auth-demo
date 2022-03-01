@@ -4,7 +4,7 @@ import Button from "@mui/material/Button"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { update, reset } from "../features/auth/authSlice"
+import { update, reset, get } from "../features/auth/authSlice"
 import { makeStyles } from "@mui/styles"
 import Spinner from "../components/Spinner"
 
@@ -29,9 +29,13 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isSuccess, message, profile } = useSelector(
     (state) => state.auth
   )
+
+  useEffect(() => {
+    dispatch(get())
+  },[])
 
   useEffect(() => {
     if (!user) {
@@ -49,6 +53,7 @@ const Dashboard = () => {
     }
 
     dispatch(reset())
+    dispatch(get())
 
   }, [isError, isSuccess, navigate, dispatch])
 
@@ -83,16 +88,21 @@ const Dashboard = () => {
         }
       }
 
-    dispatch(update(userData))
-
-    resetValues()
+      if( Object.keys(userData).length == 0) {
+        toast.error('Please Enter Atleast One Field To Update')
+      } else {
+        dispatch(update(userData))
+        resetValues()
+      }
   }
 
   return (
     <>
+
       <div className="form-container">
         <section className="heading">
           <h1>Profile</h1>
+          { !profile.message ? (<p>Name : {profile.name} <br/>Email : {profile.email} <br/></p>) : ('')}
           <p>Update your Information here</p>
         </section>
 

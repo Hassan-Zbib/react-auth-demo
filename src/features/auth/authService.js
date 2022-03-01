@@ -47,7 +47,7 @@ const get = async (token) =>{
         }
     }
 
-    const res = await axios.post(AUTH_URL + 'user-profile', config)
+    const res = await axios.get(AUTH_URL + 'user-profile', config)
 
     return res.data
 }
