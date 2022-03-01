@@ -88,7 +88,7 @@ const Login = () => {
         </section>
 
         <section className="form">
-          <form onSubmit={onSubmit}>
+          <form>
             <div className="form-group">
               <TextField
                 required
