@@ -4,7 +4,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { CardActionArea } from '@mui/material'
 
-const ServiceCard = ({src, content}) => {
+const ServiceCard = ({src, content, title}) => {
   return (
     <Card >
       <CardActionArea>
@@ -16,7 +16,7 @@ const ServiceCard = ({src, content}) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {content}

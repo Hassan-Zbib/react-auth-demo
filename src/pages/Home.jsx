@@ -19,25 +19,28 @@ const Home = () => {
 
           <Grid item xs={12} md={4}>
             <ServiceCard
-              src={"../assets/3.avif"}
+              title={"Live Support"}
+              src={"../assets/services1.jpg"}
               content={
-                "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam."
               }
             />
           </Grid>
           <Grid item xs={12} md={4}>
             <ServiceCard
-              src={"../assets/3.avif"}
+              title={"Cloud Computing"}
+              src={"../assets/services2.png"}
               content={
-                "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam."
               }
             />
           </Grid>
           <Grid item xs={12} md={4}>
             <ServiceCard
-              src={"../assets/3.avif"}
+              title={"Finance"}
+              src={"../assets/services3.jpg"}
               content={
-                "Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica"
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam."
               }
             />
           </Grid>
@@ -52,10 +55,11 @@ const Home = () => {
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
             blanditiis tenetur unde suscipit, quam beatae rerum inventore
             consectetur, neque doloribus, cupiditate numquam dignissimos laborum
-            fugiat deleniti? Eum quasi quidem quibusdam.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-            blanditiis tenetur unde suscipit, quam beatae rerum inventore
-            consectetur, neque doloribus, cupiditate numquam dignissimos laborum
-            fugiat deleniti? Eum quasi quidem quibusdam.
+            fugiat deleniti? Eum quasi quidem quibusdam.Lorem ipsum dolor sit
+            amet, consectetur adipisicing elit. Quos blanditiis tenetur unde
+            suscipit, quam beatae rerum inventore consectetur, neque doloribus,
+            cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi
+            quidem quibusdam.
           </Typography>
         </section>
       </div>
