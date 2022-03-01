@@ -65,22 +65,24 @@ export const update = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.access_token
-      return await authService.update(userData, token)
+      let res = await authService.update(userData, token)
+      return thunkAPI.fulfillWithValue((res.message))
     } catch (error) {
-      let message = ""
-
-      let err = error.response.data
-      if (err) {
-        for (let key in err) {
-          err[key].forEach((mes) => {
-            message += mes
-          })
-        }
-      } else {
-        message = error.toString()
-      }
-
-      return thunkAPI.rejectWithValue(message)
+      // let message = ""
+      
+      // let err = error.response.data
+      // console.log(error.response.data)
+      // if (err) {
+      //   for (let key in err) {
+      //     err[key].forEach((mes) => {
+      //       message += mes
+      //     })
+      //   }
+      // } else {
+      //   message = error.toString()
+      // }
+      
+      // return thunkAPI.rejectWithValue(message)
     }
   }
 )

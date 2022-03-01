@@ -1,9 +1,12 @@
-import { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
 import { TextField } from "@mui/material"
+import { useState, useEffect } from "react"
 import Button from "@mui/material/Button"
+import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { update, reset } from "../features/auth/authSlice"
 import { makeStyles } from "@mui/styles"
+import Spinner from "../components/Spinner"
 
 const useStyles = makeStyles({
   input: {
@@ -24,14 +27,64 @@ const Dashboard = () => {
   const [{ name, email, password }, setFormData] = useState(formData)
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const { user } = useSelector((state) => state.auth)
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
 
   useEffect(() => {
     if (!user) {
       navigate("/")
     }
-  }, [user, navigate])
+
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess) {
+      toast.success(message)
+    }
+
+    dispatch(reset())
+
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
+  const resetValues = () => {
+    setFormData({ ...formData })
+  }
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    // inplace validation
+    const tempData = {
+      name,
+      email,
+      password
+    }
+      const userData = {}
+      for( let obj in tempData) {
+        if (tempData[obj]) {
+          userData[obj] = tempData[obj]
+        }
+      }
+
+    dispatch(update(userData))
+
+    resetValues()
+  }
 
   return (
     <>
@@ -42,43 +95,40 @@ const Dashboard = () => {
         </section>
 
         <section className="form">
-          <form>
+          <form onSubmit={onSubmit}>
             <div className="form-group">
               <TextField
-                required
                 inputProps={{ className: classes.input }}
                 label="Name"
                 name="name"
                 variant="outlined"
-                // value={name}
-                // onChange={onChange}
+                value={name}
+                onChange={onChange}
               />
             </div>
             <div className="form-group">
               <TextField
-                required
                 inputProps={{ className: classes.input }}
                 label="Email"
                 name="email"
                 variant="outlined"
-                // value={email}
-                // onChange={onChange}
+                value={email}
+                onChange={onChange}
               />
             </div>
             <div className="form-group">
               <TextField
-                required
                 inputProps={{ className: classes.input }}
                 label="Password"
                 name="password"
                 variant="outlined"
-                // value={password}
-                // onChange={onChange}
+                value={password}
+                onChange={onChange}
               />
             </div>
             <div className="form-group">
               <Button variant="contained" 
-              // onClick={onSubmit}
+              type="submit"
               >
                 Update
               </Button>

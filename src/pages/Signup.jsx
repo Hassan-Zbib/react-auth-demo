@@ -100,7 +100,7 @@ const Signup = () => {
         </section>
 
         <section className="form">
-          <form>
+          <form onSubmit={onSubmit}>
           <div className="form-group">
               <TextField
                 required
@@ -146,7 +146,7 @@ const Signup = () => {
               />
             </div>
             <div className="form-group">
-              <Button variant="contained" onClick={onSubmit}>
+              <Button variant="contained" type="submit">
                 Sign Up
               </Button>
               <p>

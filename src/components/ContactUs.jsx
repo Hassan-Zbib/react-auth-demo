@@ -141,7 +141,7 @@ const ContactUs = () => {
               />
             </div>
             <div className="form-group">
-              <Button variant="contained" onClick={onSubmit}>
+              <Button variant="contained" type="submit">
                 Submit
               </Button>
             </div>
