@@ -12,7 +12,7 @@ code {
     monospace;
 } */
 :root {
-  --footer-color: #45515c;
+  --footer-color: #434c5f;
 }
 .carousel-image {
   display: block;
@@ -68,10 +68,11 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px
 }
 
 .form-group {
-  margin-top: 10px;
+  margin: 10px;
 }
 
 .loadingSpinnerContainer {

@@ -21,7 +21,7 @@ export const register = createAsyncThunk(
     } catch (error) {
 
       let message = []
-      let err = error.response.data
+      let err = JSON.parse(error.response.data)
       if (err) {
         for (let key in err) {
           err[key].forEach((mes) => {
