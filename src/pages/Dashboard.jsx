@@ -35,7 +35,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div id="form-container">
+      <div className="form-container">
         <section className="heading">
           <h1>Profile</h1>
           <p>Update your Information here</p>

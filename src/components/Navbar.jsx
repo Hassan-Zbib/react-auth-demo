@@ -12,6 +12,7 @@ import Button from "@mui/material/Button"
 import MenuItem from "@mui/material/MenuItem"
 import { useSelector, useDispatch } from "react-redux"
 import { logout, reset } from "../features/auth/authSlice"
+import { Link as UiLink } from "@mui/material"
 
 const pages = ["Slider", "Services", "About Us", "Contact Us"]
 
@@ -33,8 +34,7 @@ const Navbar = () => {
   const onLogout = () => {
     dispatch(logout())
     dispatch(reset())
-    navigate('/')
-
+    navigate("/")
   }
 
   const title = "ReactAuth"
@@ -43,6 +43,7 @@ const Navbar = () => {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* small navbar size */}
           <Typography
             variant="h6"
             noWrap
@@ -51,48 +52,117 @@ const Navbar = () => {
           >
             {title}
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  component={Link}
-                  to={"#slider"}
+            {!user ? (
+              <>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
                 >
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{
+                    display: { xs: "block", md: "none" },
+                  }}
+                >
+                  <MenuItem
+                    onClick={handleCloseNavMenu}
+                    component={UiLink}
+                    href="#slider"
+                  >
+                    <Typography textAlign="center">Slider</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={handleCloseNavMenu}
+                    component={UiLink}
+                    href="#services"
+                  >
+                    <Typography textAlign="center">Services</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={handleCloseNavMenu}
+                    component={UiLink}
+                    href="#about-us"
+                  >
+                    <Typography textAlign="center">About Us</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={handleCloseNavMenu}
+                    component={UiLink}
+                    href="#contact-us"
+                  >
+                    <Typography textAlign="center">Contact Us</Typography>
+                  </MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <>
+                              <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left",
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{
+                    display: { xs: "block", md: "none" },
+                  }}
+                >
+                  <MenuItem
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    to={'/'}
+                  >
+                    <Typography textAlign="center">Home</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    to={'/Dashboard'}
+                  >
+                    <Typography textAlign="center">Dashboard</Typography>
+                  </MenuItem>
+                </Menu>
+              </>
+            )}
           </Box>
+
+          {/* big navbar size */}
           <Typography
             variant="h6"
             noWrap
@@ -102,22 +172,74 @@ const Navbar = () => {
             {title}
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-                component={Link}
-                to={"/"}
-              >
-                {page}
-              </Button>
-            ))}
+            {!user ? (
+              <>
+                <Button
+                  component={UiLink}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  href="#slider"
+                >
+                  <Typography textAlign="center" fontSize={"small"}>
+                    Slider
+                  </Typography>
+                </Button>
+                <Button
+                  component={UiLink}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  href="#services"
+                >
+                  <Typography textAlign="center" fontSize={"small"}>
+                    Services
+                  </Typography>
+                </Button>
+                <Button
+                  component={UiLink}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  href="#about-us"
+                >
+                  <Typography textAlign="center" fontSize={"small"}>
+                    About Us
+                  </Typography>
+                </Button>
+                <Button
+                  component={UiLink}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  href="#contact-us"
+                >
+                  <Typography textAlign="center" fontSize={"small"}>
+                    Contact Us
+                  </Typography>
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  component={Link}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  to={'/'}
+                >
+                  <Typography textAlign="center" fontSize={"small"}>
+                    Home
+                  </Typography>
+                </Button>
+                <Button
+                  component={Link}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  to={'/Dashboard'}
+                >
+                  <Typography textAlign="center" fontSize={"small"}>
+                  Dashboard
+                  </Typography>
+                </Button>
+              </>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             {user ? (
-              <Button sx={{ my: 2, color: "white" }} onClick={onLogout}>Logout</Button>
+              <Button sx={{ my: 2, color: "white" }} onClick={onLogout}>
+                Logout
+              </Button>
             ) : (
               <>
                 <Button

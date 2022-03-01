@@ -6,6 +6,7 @@ const Slider = () => {
 
   return (
 <div
+id="slider"
   style={{
     paddingBottom: '30px',
     position: 'relative',

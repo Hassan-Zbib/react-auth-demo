@@ -81,21 +81,19 @@ const Login = () => {
 
   return (
     <>
-      <div id="form-container">
+      <div className="form-container">
         <section className="heading">
-        <Button
-          sx={{ my: 2, color: "white" }}
-          component={Link}
-          variant="outlined"
-          to={"/"}
-        >
-          Go Back
-        </Button>
+          <Button
+            sx={{ my: 2, color: "white" }}
+            component={Link}
+            variant="outlined"
+            to={"/"}
+          >
+            Go Back
+          </Button>
           <h1>Login</h1>
           <p>Login by entering your credentials here</p>
         </section>
-
-
 
         <section className="form">
           <form>
@@ -125,16 +123,14 @@ const Login = () => {
               <Button variant="contained" onClick={onSubmit}>
                 Login
               </Button>
+              <p>
+                New User :
+                <UiLink variant="body2" component={Link} to={"/Signup"}>
+                  Create Account
+                </UiLink>
+              </p>
             </div>
           </form>
-        </section>
-        <section className="heading">
-          <p>
-            New User :
-            <UiLink variant="body2" component={Link} to={"/Signup"}>
-              Create Account
-            </UiLink>
-          </p>
         </section>
       </div>
     </>

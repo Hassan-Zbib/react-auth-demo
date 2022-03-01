@@ -8,6 +8,7 @@ import { toast } from "react-toastify"
 import { register, reset } from "../features/auth/authSlice"
 import { makeStyles } from "@mui/styles"
 import Spinner from "../components/Spinner"
+import { Link as UiLink } from "@mui/material"
 
 const useStyles = makeStyles({
   input: {
@@ -84,7 +85,7 @@ const Signup = () => {
 
   return (
     <>
-      <div id="form-container">
+      <div className="form-container">
         <section className="heading">
         <Button
           sx={{ my: 2, color: "white" }}
@@ -148,6 +149,12 @@ const Signup = () => {
               <Button variant="contained" onClick={onSubmit}>
                 Sign Up
               </Button>
+              <p>
+                Already Registered :
+                <UiLink variant="body2" component={Link} to={"/Login"}>
+                  Login
+                </UiLink>
+              </p>
             </div>
           </form>
         </section>

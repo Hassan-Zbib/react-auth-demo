@@ -38,7 +38,7 @@ code {
   text-align: center;
 }
 
-#form-container {
+.form-container {
   width: 100%;
   min-height: 40vh;
   background-color: var(--footer-color);

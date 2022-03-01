@@ -73,7 +73,7 @@ const ContactUs = () => {
 
   return (
     <>
-      <div id="form-container">
+      <div className="form-container" id="contact-us">
         <section className="heading">
           <h1>Contact Us</h1>
           <p>For any enquiries please fill this form</p>

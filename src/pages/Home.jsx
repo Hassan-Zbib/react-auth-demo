@@ -7,7 +7,7 @@ import ContactUs from "../components/ContactUs"
 const Home = () => {
   return (
     <>
-      <Slider id="slider"/>
+      <Slider />
 
       <div id="services">
         <Grid container spacing={2}>
@@ -62,7 +62,7 @@ const Home = () => {
         </Grid>
       </div>
 
-      <ContactUs id="contact-us"/>
+      <ContactUs />
     </>
   )
 }
