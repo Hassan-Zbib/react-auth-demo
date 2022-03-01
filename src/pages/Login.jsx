@@ -96,7 +96,7 @@ const Login = () => {
         </section>
 
         <section className="form">
-          <form>
+          <form onSubmit={onSubmit}>
             <div className="form-group">
               <TextField
                 required
@@ -120,7 +120,7 @@ const Login = () => {
               />
             </div>
             <div className="form-group">
-              <Button variant="contained" onClick={onSubmit}>
+              <Button variant="contained" type="submit">
                 Login
               </Button>
               <p>
