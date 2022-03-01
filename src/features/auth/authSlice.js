@@ -6,6 +6,7 @@ const user = JSON.parse(localStorage.getItem("user"))
 
 const initialState = {
   user: user ? user : null,
+  profile: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -88,6 +89,22 @@ export const update = createAsyncThunk(
   }
 )
 
+// Get user
+export const get = createAsyncThunk(
+  "user/update",
+  async (_, thunkAPI) => {
+    try {
+
+      const token = thunkAPI.getState().auth.user.access_token
+      let res = await authService.get(token)
+      return thunkAPI.fulfillWithValue(res)
+
+    } catch (error) {
+      return thunkAPI.rejectWithValue({message: "Something Went Wrong, Please Try to Login Again"})
+    }
+  }
+)
+
 // logout user
 export const logout = createAsyncThunk("auth/logout", async () => {
   await authService.logout()
@@ -102,10 +119,12 @@ export const authSlice = createSlice({
       state.isError = false
       state.isSuccess = false
       state.message = []
+      state.profile = {}
     },
   },
   extraReducers: (builder) => {
     builder
+    // Register Side effects
       .addCase(register.pending, (state) => {
         state.isLoading = true
       })
@@ -120,6 +139,7 @@ export const authSlice = createSlice({
         state.message = action.payload
         state.user = null
       })
+      // Login Side effects
       .addCase(login.pending, (state) => {
         state.isLoading = true
       })
@@ -134,9 +154,11 @@ export const authSlice = createSlice({
         state.message = action.payload
         state.user = null
       })
+      // Logout Side effect
       .addCase(logout.fulfilled, (state) => {
         state.user = null
       })
+      // Update Side effects
       .addCase(update.pending, (state) => {
         state.isLoading = true
       })
@@ -149,6 +171,13 @@ export const authSlice = createSlice({
         state.isLoading = false
         state.isError = true
         state.message = action.payload
+      })
+      // Get Side effects
+      .addCase(get.fulfilled, (state, action) => {
+        state.profile = action.payload
+      })
+      .addCase(get.rejected, (state, action) => {
+        state.profile = action.payload
       })
   },
 })

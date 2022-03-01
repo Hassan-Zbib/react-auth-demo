@@ -26,6 +26,7 @@ const login = async (userData) => {
     return res.data
 }
 
+// Update user
 const update = async (userData, token) =>{
     const config = {
         headers: {
@@ -34,6 +35,19 @@ const update = async (userData, token) =>{
     }
 
     const res = await axios.post(USER_URL + 'update', userData, config)
+
+    return res.data
+}
+
+// Get user
+const get = async (token) =>{
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const res = await axios.post(AUTH_URL + 'user-profile', config)
 
     return res.data
 }
@@ -47,7 +61,8 @@ const authService = {
     register,
     logout,
     login,
-    update
+    update,
+    get
 }
 
 export default authService
