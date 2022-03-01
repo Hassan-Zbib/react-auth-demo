@@ -7,7 +7,7 @@ import axios from "axios"
 const useStyles = makeStyles({
   input: {
     color: "white",
-    minWidth: "30vw",
+    minWidth: "40vw",
   },
 })
 

@@ -53,7 +53,7 @@ useEffect(() => {
 
   //navigate to dashboard later
   if(isSuccess || user) {
-    navigate('/')
+    navigate('/Dashboard')
   }
 
   dispatch(reset())

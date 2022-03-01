@@ -1,13 +1,18 @@
 import { TextField } from "@mui/material"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Button from "@mui/material/Button"
 import { makeStyles } from "@mui/styles"
+import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import { login, reset } from "../features/auth/authSlice"
+import Spinner from "../components/Spinner"
 
 const useStyles = makeStyles({
   input: {
     color: "white",
-    minWidth: "30vw",
-  }
+    minWidth: "40vw",
+  },
 })
 
 const formData = {
@@ -19,6 +24,30 @@ const Login = () => {
   const classes = useStyles()
 
   const [{ email, password }, setFormData] = useState(formData)
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+
+  //before onchage
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess || user) {
+      navigate("/Dashboard")
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  if(isLoading) {
+    return <Spinner />
+  }
 
   const resetValues = () => {
     setFormData({ ...formData })
@@ -34,10 +63,12 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    let payload = {
+    let userData = {
       email,
       password,
     }
+
+    dispatch(login(userData))
 
     resetValues()
   }
