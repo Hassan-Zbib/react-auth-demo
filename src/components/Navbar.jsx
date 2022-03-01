@@ -73,7 +73,7 @@ const Navbar = () => {
                   key={page}
                   onClick={handleCloseNavMenu}
                   component={Link}
-                  to={"/"}
+                  to={"#slider"}
                 >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
