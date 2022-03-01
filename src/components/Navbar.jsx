@@ -104,11 +104,23 @@ const Navbar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Button
-              sx={{ my: 2, color: "white", display: "block" }}
+              sx={{ my: 2, color: "white"}}
               component={Link}
               to={"/Login"}
             >
               Login
+            </Button>
+            <Button
+              sx={{ my: 2, color: "white" }}
+              component={Link}
+              to={"/Signup"}
+            >
+              Sign Up
+            </Button>
+            <Button
+              sx={{ my: 2, color: "white" }}
+            >
+              Logout
             </Button>
           </Box>
         </Toolbar>
