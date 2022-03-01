@@ -9,7 +9,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
-  message: "",
+  message: []
 }
 
 // SignUp user
@@ -19,59 +19,9 @@ export const register = createAsyncThunk(
     try {
       return await authService.register(user)
     } catch (error) {
-      let message = ""
-
-      let err = JSON.parse(error.response.data)
-      if (err) {
-        for (let key in err) {
-          err[key].forEach((mes) => {
-            message += mes
-          })
-        }
-      } else {
-        message = error.toString()
-      }
-
-      return thunkAPI.rejectWithValue(message)
-    }
-  }
-)
-
-// Login user
-export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
-  try {
-    return await authService.login(user)
-  } catch (error) {
-    let message = ""
-
-    let err = error.response.data
-    if (err) {
-      for (let key in err) {
-        err[key].forEach((mes) => {
-          message += mes
-        })
-      }
-    } else {
-      message = error.toString()
-    }
-
-    return thunkAPI.rejectWithValue(message)
-  }
-})
-
-// Update user
-export const update = createAsyncThunk(
-  "user/update",
-  async (userData, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.access_token
-      let res = await authService.update(userData, token)
-      return thunkAPI.fulfillWithValue((res.message))
-    } catch (error) {
       // let message = ""
-      
-      // let err = error.response.data
-      // console.log(error.response.data)
+
+      // let err = JSON.parse(error.response.data)
       // if (err) {
       //   for (let key in err) {
       //     err[key].forEach((mes) => {
@@ -81,8 +31,59 @@ export const update = createAsyncThunk(
       // } else {
       //   message = error.toString()
       // }
-      
+
       // return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// Login user
+export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
+  try {
+    return await authService.login(user)
+  } catch (error) {
+    // let message = ""
+
+    // let err = error.response.data
+    // if (err) {
+    //   for (let key in err) {
+    //     err[key].forEach((mes) => {
+    //       message += mes
+    //     })
+    //   }
+    // } else {
+    //   message = error.toString()
+    // }
+
+    // return thunkAPI.rejectWithValue(message)
+  }
+})
+
+// Update user
+export const update = createAsyncThunk(
+  "user/update",
+  async (userData, thunkAPI) => {
+    try {
+
+      const token = thunkAPI.getState().auth.user.access_token
+      let res = await authService.update(userData, token)
+      return thunkAPI.fulfillWithValue([res.message])
+
+    } catch (error) {
+
+      let message = []
+      let err = error.response.data
+      if (err) {
+        for (let key in err.errors) {
+          err.errors[key].forEach((mes) => {
+            message.push(mes)
+          })
+        }
+      } else {
+        message.push(error.toString())
+      }
+      return thunkAPI.rejectWithValue(message)
+
     }
   }
 )
@@ -100,7 +101,7 @@ export const authSlice = createSlice({
       state.isLoading = false
       state.isError = false
       state.isSuccess = false
-      state.message = ""
+      state.message = []
     },
   },
   extraReducers: (builder) => {

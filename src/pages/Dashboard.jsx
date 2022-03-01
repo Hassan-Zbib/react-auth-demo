@@ -37,18 +37,20 @@ const Dashboard = () => {
     if (!user) {
       navigate("/")
     }
+  },[user] )
 
+  useEffect(() => {
     if (isError) {
-      toast.error(message)
+      message.forEach(mes => {toast.error(mes)})
     }
 
     if (isSuccess) {
-      toast.success(message)
+      message.forEach(mes => {toast.success(mes)})
     }
 
     dispatch(reset())
 
-  }, [user, isError, isSuccess, message, navigate, dispatch])
+  }, [isError, isSuccess, navigate, dispatch])
 
   if (isLoading) {
     return <Spinner />

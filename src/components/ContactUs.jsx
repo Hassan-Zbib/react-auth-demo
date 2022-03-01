@@ -59,8 +59,6 @@ const ContactUs = () => {
 
       .catch((err) => {
         let error = err.response.data
-        toast.error(error.message)
-
         for (let key in error.errors) {
           error.errors[key].forEach((mes) => {
             toast.error(mes)
