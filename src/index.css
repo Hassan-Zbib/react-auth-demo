@@ -12,7 +12,7 @@ code {
     monospace;
 } */
 :root {
-  --footer-color: #364d64;
+  --footer-color: #45515c;
 }
 .carousel-image {
   display: block;
@@ -38,7 +38,7 @@ code {
   text-align: center;
 }
 
-#contact-us {
+#form-container {
   width: 100%;
   min-height: 40vh;
   background-color: var(--footer-color);
@@ -54,7 +54,7 @@ code {
 }
 
 .heading p {
-  color: #828282;
+  color: #beb8b8;
 }
 
 .form,

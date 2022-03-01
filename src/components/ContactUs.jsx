@@ -59,9 +59,10 @@ const ContactUs = () => {
 
   return (
     <>
-      <div id="contact-us">
+      <div id="form-container">
         <section className="heading">
           <h1>Contact Us</h1>
+          <p>For any enquiries please fill this form</p>
         </section>
 
         <section className="form">
@@ -87,7 +88,7 @@ const ContactUs = () => {
                 value={email}
                 onChange={onChange}
               />
-            </div>{" "}
+            </div>
             <div className="form-group">
               <TextField
                 required
@@ -98,7 +99,7 @@ const ContactUs = () => {
                 value={phone}
                 onChange={onChange}
               />
-            </div>{" "}
+            </div>
             <div className="form-group">
               <TextField
                 required
@@ -110,7 +111,7 @@ const ContactUs = () => {
                 fullWidth
                 onChange={onChange}
               />
-            </div>{" "}
+            </div>
             <div className="form-group">
               <TextField
                 required
