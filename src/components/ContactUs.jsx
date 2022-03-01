@@ -3,6 +3,7 @@ import { useState } from "react"
 import Button from "@mui/material/Button"
 import { makeStyles } from "@mui/styles"
 import axios from "axios"
+import { toast } from "react-toastify"
 
 const useStyles = makeStyles({
   input: {
@@ -50,9 +51,23 @@ const ContactUs = () => {
       message,
     }
 
-    api.post("/", payload)
-        .then(res => console.log(res.data))
-        .catch(err => {console.log(err.response.data)})
+    api
+      .post("/", payload)
+      .then((res) => {
+        toast.success(res.data.message)
+      })
+
+      .catch((err) => {
+        let error = err.response.data
+        console.log(error)
+        toast.error(error.message)
+
+        for (let key in error.errors) {
+          error.errors[key].forEach((mes) => {
+            toast.error(mes)
+          })
+        }
+      })
 
     resetValues()
   }
