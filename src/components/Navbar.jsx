@@ -1,30 +1,43 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
-import MenuItem from "@mui/material/MenuItem";
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import AppBar from "@mui/material/AppBar"
+import Box from "@mui/material/Box"
+import Toolbar from "@mui/material/Toolbar"
+import IconButton from "@mui/material/IconButton"
+import Typography from "@mui/material/Typography"
+import Menu from "@mui/material/Menu"
+import MenuIcon from "@mui/icons-material/Menu"
+import Container from "@mui/material/Container"
+import Button from "@mui/material/Button"
+import MenuItem from "@mui/material/MenuItem"
+import { useSelector, useDispatch } from "react-redux"
+import { logout, reset } from "../features/auth/authSlice"
 
-const pages = ["Slider", "Services", "About Us", "Contact Us"];
+const pages = ["Slider", "Services", "About Us", "Contact Us"]
 
 const Navbar = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.auth)
+
+  const [anchorElNav, setAnchorElNav] = useState(null)
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+    setAnchorElNav(event.currentTarget)
+  }
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+    setAnchorElNav(null)
+  }
 
-  const title = "ReactAuth";
+  const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+
+  }
+
+  const title = "ReactAuth"
 
   return (
     <AppBar position="sticky">
@@ -103,29 +116,30 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Button
-              sx={{ my: 2, color: "white"}}
-              component={Link}
-              to={"/Login"}
-            >
-              Login
-            </Button>
-            <Button
-              sx={{ my: 2, color: "white" }}
-              component={Link}
-              to={"/Signup"}
-            >
-              Sign Up
-            </Button>
-            <Button
-              sx={{ my: 2, color: "white" }}
-            >
-              Logout
-            </Button>
+            {user ? (
+              <Button sx={{ my: 2, color: "white" }} onClick={onLogout}>Logout</Button>
+            ) : (
+              <>
+                <Button
+                  sx={{ my: 2, color: "white" }}
+                  component={Link}
+                  to={"/Login"}
+                >
+                  Login
+                </Button>
+                <Button
+                  sx={{ my: 2, color: "white" }}
+                  component={Link}
+                  to={"/Signup"}
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
-  );
-};
-export default Navbar;
+  )
+}
+export default Navbar

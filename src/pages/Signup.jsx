@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import Button from "@mui/material/Button"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import { register, reset } from "../features/auth/authSlice"
 import { makeStyles } from "@mui/styles"
@@ -85,6 +86,14 @@ const Signup = () => {
     <>
       <div id="form-container">
         <section className="heading">
+        <Button
+          sx={{ my: 2, color: "white" }}
+          component={Link}
+          variant="outlined"
+          to={"/"}
+        >
+          Go Back
+        </Button>
           <h1>Sign Up</h1>
           <p>Sign Up by entering your information here</p>
         </section>

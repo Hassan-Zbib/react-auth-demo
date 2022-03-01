@@ -83,9 +83,19 @@ const Login = () => {
     <>
       <div id="form-container">
         <section className="heading">
+        <Button
+          sx={{ my: 2, color: "white" }}
+          component={Link}
+          variant="outlined"
+          to={"/"}
+        >
+          Go Back
+        </Button>
           <h1>Login</h1>
           <p>Login by entering your credentials here</p>
         </section>
+
+
 
         <section className="form">
           <form>

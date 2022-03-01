@@ -19,6 +19,7 @@ const login = async (userData) => {
     const res = await axios.post(API_URL + 'login', userData)
 
     if(res.data) {
+        // should add logout call to api
         localStorage.setItem('user', JSON.stringify(res.data))
     }
 
