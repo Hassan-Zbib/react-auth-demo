@@ -73,7 +73,7 @@ const Login = () => {
         password,
       }
 
-      dispatch(register(userData))
+      dispatch(login(userData))
     }
 
     resetValues()

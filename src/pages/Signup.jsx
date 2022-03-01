@@ -1,4 +1,6 @@
+import { TextField } from "@mui/material"
 import { useState, useEffect } from "react"
+import Button from "@mui/material/Button"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
@@ -23,7 +25,7 @@ const formData = {
 const Signup = () => {
   const classes = useStyles()
 
-  const { name, email, password, password_confirmation } = formData
+  const [{ name, email, password, password_confirmation }, setFormData] = useState(formData)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -79,6 +81,69 @@ const Signup = () => {
     resetValues()
   }
 
-  return <div>Signup</div>
+  return (
+    <>
+      <div id="form-container">
+        <section className="heading">
+          <h1>Sign Up</h1>
+          <p>Sign Up by entering your information here</p>
+        </section>
+
+        <section className="form">
+          <form>
+          <div className="form-group">
+              <TextField
+                required
+                inputProps={{ className: classes.input }}
+                label="Name"
+                name="name"
+                variant="outlined"
+                value={name}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <TextField
+                required
+                inputProps={{ className: classes.input }}
+                label="Email"
+                name="email"
+                variant="outlined"
+                value={email}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <TextField
+                required
+                inputProps={{ className: classes.input }}
+                label="Password"
+                name="password"
+                variant="outlined"
+                value={password}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <TextField
+                required
+                inputProps={{ className: classes.input }}
+                label="Confirm Password"
+                name="password_confirmation"
+                variant="outlined"
+                value={password_confirmation}
+                onChange={onChange}
+              />
+            </div>
+            <div className="form-group">
+              <Button variant="contained" onClick={onSubmit}>
+                Sign Up
+              </Button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </>
+  )
 }
 export default Signup
