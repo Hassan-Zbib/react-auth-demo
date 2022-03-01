@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { login, reset } from "../features/auth/authSlice"
 import Spinner from "../components/Spinner"
+import { Link } from "react-router-dom"
+import { Link as UiLink } from "@mui/material"
 
 const useStyles = makeStyles({
   input: {
@@ -32,7 +34,6 @@ const Login = () => {
     (state) => state.auth
   )
 
-  //before onchage
   useEffect(() => {
     if (isError) {
       toast.error(message)
@@ -45,7 +46,7 @@ const Login = () => {
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
-  if(isLoading) {
+  if (isLoading) {
     return <Spinner />
   }
 
@@ -63,12 +64,17 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    let userData = {
-      email,
-      password,
-    }
+    // inplace validation
+    if (!email) {
+      toast.error("Email is empty")
+    } else {
+      let userData = {
+        email,
+        password,
+      }
 
-    dispatch(login(userData))
+      dispatch(register(userData))
+    }
 
     resetValues()
   }
@@ -111,6 +117,14 @@ const Login = () => {
               </Button>
             </div>
           </form>
+        </section>
+        <section className="heading">
+          <p>
+            New User :
+            <UiLink variant="body2" component={Link} to={"/Signup"}>
+              Create Account
+            </UiLink>
+          </p>
         </section>
       </div>
     </>
