@@ -131,6 +131,7 @@ const Signup = () => {
                 name="password"
                 variant="outlined"
                 value={password}
+                type="password"
                 onChange={onChange}
               />
             </div>
@@ -142,6 +143,7 @@ const Signup = () => {
                 name="password_confirmation"
                 variant="outlined"
                 value={password_confirmation}
+                type="password"
                 onChange={onChange}
               />
             </div>

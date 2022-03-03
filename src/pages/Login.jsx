@@ -122,6 +122,7 @@ const Login = () => {
                 variant="outlined"
                 value={password}
                 onChange={onChange}
+                type="password"
               />
             </div>
             <div className="form-group">
