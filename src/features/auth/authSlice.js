@@ -43,15 +43,21 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   } catch (error) {
     let message = []
     let err = error.response.data
-    if (err) {
-      for (let key in err) {
-        err[key].forEach((mes) => {
-          message.push(mes)
-        })
-      }
+
+    if (err.error) {
+      message = [`${err.error}`]
     } else {
-      message.push(error.toString())
+      if (err) {
+        for (let key in err) {``
+          err[key].forEach((mes) => {
+            message.push(mes)
+          })
+        }
+      } else {
+        message.push(error.toString())
+      }
     }
+
     return thunkAPI.rejectWithValue(message)
   }
 })
