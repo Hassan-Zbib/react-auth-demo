@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
-import { register, reset } from "../features/auth/authSlice"
+import { register, reset, logout } from "../features/auth/authSlice"
 import { makeStyles } from "@mui/styles"
 import Spinner from "../components/Spinner"
 import { Link as UiLink } from "@mui/material"
@@ -46,8 +46,10 @@ const Signup = () => {
       })
     }
 
-    if (isSuccess || user) {
-      navigate("/Dashboard")
+    if (isSuccess) {
+      message.forEach((mes) => {
+        toast.success(mes)
+      })
     }
 
     dispatch(reset())
